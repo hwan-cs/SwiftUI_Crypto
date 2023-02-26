@@ -8,10 +8,17 @@
 import SwiftUI
 
 @main
-struct Swiftful_CryptoApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+struct Swiftful_CryptoApp: App
+{
+    var body: some Scene
+    {
+        WindowGroup
+        {
+            NavigationView
+            {
+                HomeView()
+                    .toolbar(.hidden, for: .automatic)
+            }
         }
     }
 }
