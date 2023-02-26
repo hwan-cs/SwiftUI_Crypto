@@ -15,21 +15,16 @@ struct CoinRowView: View
     
     var body: some View
     {
-        GeometryReader
-        { geo in
-            HStack(spacing: 0)
+        HStack(spacing: 0)
+        {
+            leftColumn
+            Spacer()
+            if showHoldingsColumn
             {
-                leftColumn
-                Spacer()
-                if showHoldingsColumn
-                {
-                    centerColumn
-                }
-                rightColumn
-                    .frame(width: geo.size.width / 3.5, alignment: .trailing)
-                    .padding(12.0)
+                centerColumn
             }
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            rightColumn
+                .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
         }
     }
 }
@@ -86,6 +81,8 @@ extension CoinRowView
             Text(coin.currentPrice.asCurrencyWith6Decimals())
                 .bold()
                 .foregroundColor(Color.theme.accent)
+                .lineLimit(1)
+                .minimumScaleFactor(0.01)
             Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
                 .foregroundColor(
                     (coin.priceChangePercentage24H ?? 0) >= 0 ? Color.theme.green : Color.theme.red)
